@@ -50,3 +50,11 @@ bruno.each = function(array, fordo) {
     fordo(i);
   }
 }
+bruno.addElement = function(name, text, addplace) {
+  var elem = document.createElement(name);
+  var text = document.createTextNode(text);
+  elem.appendChild(text);
+  var add = bruno.getElement(addplace);
+  add.appendChild(elem);
+}
+
