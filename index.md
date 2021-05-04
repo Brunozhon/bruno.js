@@ -33,4 +33,6 @@ bruno.ajax("GET", "examplefile.json", true, function() {
   }
 })
 ```
+## Links
 
+[Docs](docs/)
