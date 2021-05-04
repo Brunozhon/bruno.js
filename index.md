@@ -14,7 +14,7 @@ bruno.strict = true;
 bruno.each(["hello", "world"]); // This will throw an error
 bruno.each(["correct", "way"], function(i) {
   r += array[i];
-});
+}); // This is the correct way
 bruno.strict = false;
 bruno.each(["another", "array"]) // This will not throw an error
 ```
