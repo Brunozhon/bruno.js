@@ -1,4 +1,5 @@
 var bruno = {};
+bruno.strict = false;
 bruno.getElements = function(e) {
   return document.querySelectorAll(e);
 }
@@ -15,8 +16,12 @@ bruno.ajax = function(type, file, asyncn, callback) {
     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (typeof callback == "function") {
       callback();
+    } else if (callback != undefined && typeof callback != "function") {
+      if (bruno.strict) {
+        throw "Typeof paramenter 'callback' is not 'function' at the function 'bruno.ajax'. Please verify that the input that you passed for 'callback' is a function.";
+      }
     }
   };
   xhttp.open(type, file, asyncn);
@@ -47,7 +52,13 @@ bruno.text = function(elem, html, select, num) {
 }
 bruno.each = function(array, fordo) {
   for (var i=0; i<array.length; i+=1) {
-    fordo(i);
+    if (typeof fordo == "function") {
+      fordo(i);
+    } else {
+      if (bruno.strict) {
+        throw "The parameter 'fordo' is required and typeof 'fordo' is not 'function'. Please make sure that you are passing the paramenter 'fordo' and it is a function."
+      }
+    }
   }
 }
 bruno.addElement = function(name, text, addplace) {
